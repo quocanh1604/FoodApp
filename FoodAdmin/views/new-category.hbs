@@ -1,0 +1,29 @@
+<div class="container">
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <h2>Add Class</h2>
+      </div>
+
+      <div class="col-sm-6 text-right">
+        <button type="button" class="btn btn-primary" onclick="goBack()">Go back</button>
+      </div>
+
+      <form action="/product/category/add-category" method="POST" class="col-sm-12">
+        <div class="form-group">
+          <label for="name">Category:</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter Category" name="name">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      
+    </div>
+
+  </div>
+
+  <script>
+    function goBack() {
+      window.location.href = '/product/category'
+    }
+  </script>

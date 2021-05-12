@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "607c393f4f645f401f5a4b43"
+  },
+  "nameProduct": "Coffeee",
+  "number": 10,
+  "dateSell": {
+    "$date": "2021-02-03T00:00:00Z"
+  },
+  "description": "Coffee is...",
+  "img": "coffee.jpg",
+  "idCategory": {
+    "$oid": "607c3b6ee6b97f4fbc2b59bd"
+  },
+  "price": 15000
+},{
+  "_id": {
+    "$oid": "607c3bd1e6b97f4fbc2b59bf"
+  },
+  "nameProduct": "Pho",
+  "number": 10,
+  "dateSell": {
+    "$date": "2021-05-02T17:00:00Z"
+  },
+  "description": "Pho babla",
+  "img": "pho.jpg",
+  "idCategory": {
+    "$oid": "607c3b334f645f401f5a4b46"
+  },
+  "price": 30000
+}]

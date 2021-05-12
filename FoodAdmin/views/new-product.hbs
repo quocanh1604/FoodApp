@@ -1,0 +1,128 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-sm-6">
+      <h2>Add Product</h2>
+    </div>
+
+    <div class="col-sm-6 text-right">
+      <button type="button" class="btn btn-primary" onclick="goBack()">Go back</button>
+    </div>
+
+    <form action="/product/add-product" method="POST" class="col-sm-12" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="nameProduct">Name Product:</label>
+        <input type="text" class="form-control" id="nameProduct" placeholder="Enter Name Product" name="nameProduct" 
+        onchange="ValidateName()">
+        <p id="nameError" class="alert alert-danger d-none"></p>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" id="price" name="price" 
+        onchange="ValidatePrice()">
+        <p id="nameError" class="alert alert-danger d-none"></p>
+      </div>
+      <div class="form-group">
+        <label for="number">Number:</label>
+        <input type="number" class="form-control" id="number" name="number">
+      </div>
+      <div class="form-group">
+        <label for="dateSell">Date:</label>
+        <input type="date" class="form-control" id="dateSell" name="dateSell">
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" class="form-control" placeholder="Enter Description" id="description" name="description"
+        onchange="ValidateDes()">
+        <p id="nameError" class="alert alert-danger d-none"></p>
+      </div>
+      <div class="form-group">
+        <select class="form-select" id="idCategory" name="idCategory">
+          {{#each list}}
+          <option value="{{ this._id }}">{{ this.name }}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="img">Image:</label>
+        <input type="file" id="img" name="img">
+      </div>
+      <div><img class="d-none" width="100" height="100" id="showImg" src="" alt=""></div>
+      
+      
+      <button type="submit" class="btn btn-primary" id="btn">Submit</button>
+    </form>
+
+  </div>
+
+</div>
+
+<script>
+  var isNameValid = false, isPriceValid = false, isCategoriesValid = false
+
+  function ValidateName() {
+    let name = document.getElementById('nameProduct').value
+    if (!name || name.trim().length == 0 || name.trim().length > 50) {
+      document.getElementById('nameError').innerText = 'Vui lòng không bỏ trống hoặc nhập quá 50 kí tự'
+      document.getElementById('nameError').classList.remove('d-none')
+      isNameValid = false
+    } else {
+      document.getElementById('nameError').innerText = ''
+      document.getElementById('nameError').classList.add('d-none')
+      isNameValid = true
+    }
+    validateForm()
+  }
+  function ValidateDes() {
+    let name = document.getElementById('description').value
+    if (!name || name.trim().length == 0 || name.trim().length > 500) {
+      document.getElementById('nameError').innerText = 'Vui lòng không bỏ trống hoặc nhập quá 50 kí tự'
+      document.getElementById('nameError').classList.remove('d-none')
+      isNameValid = false
+    } else {
+      document.getElementById('nameError').innerText = ''
+      document.getElementById('nameError').classList.add('d-none')
+      isNameValid = true
+    }
+    validateForm()
+  }
+
+  function ValidatePrice() {
+    let name = document.getElementById('price').value
+    if (!name || name.trim().length == 0 || name.trim().length > 500) {
+      document.getElementById('priceError').innerText = 'Vui lòng không bỏ trống hoặc nhập đúng'
+      document.getElementById('priceError').classList.remove('d-none')
+      isPriceValid = false
+    } else {
+      document.getElementById('priceError').innerText = ''
+      document.getElementById('priceError').classList.add('d-none')
+      isPriceValid = true
+    }
+    validateForm()
+  }
+
+  function validateForm() {
+    if (isNameValid == false || isPriceValid == false) {
+      document.getElementById('btn').disabled = true
+    } else {
+      document.getElementById('btn').disabled = false
+    }
+  }
+  function goBack() {
+    window.location.href = '/product'
+  }
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader()
+      reader.onload = function (e) {
+        $('#showImg').attr('src', e.target.result)
+        $('#showImg').removeClass('d-none')
+      }
+      reader.readAsDataURL(input.files[0])
+    }
+  }
+  $("#img").change(function () {
+    readURL(this)
+  })
+</script>
